@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<title>Live Streaming Webserver</title>
+<body>
+ <center>
+
+
+	  <hr> <br>
+{% if bodyText%}
+   {{ bodyText }}
+{% else %}
+  <h1>Default</h1>
+{% endif %}
+</body>
+<br></br>
+
+<img id="bg" src="{{ url_for('video_feed') }}">
+
+
+
+
+
+</html
