@@ -5,20 +5,17 @@
 # Version : 0.3  March/2016
 #/>.
 
-
 from flask import Flask, render_template, Markup, Response, request, redirect, session
 from flask_basicauth import BasicAuth
 from camera import VideoCamera
 import smtplib
 import time
 
-
 def gen(camera):
     while True:
         frame = camera.get_frame()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-
 
 app = Flask(__name__)
 
@@ -32,14 +29,10 @@ basic_auth = BasicAuth(app)
 def index():
 	return render_template('template.html', bodyText="Welcome to my webcam")
 
-
-
 @app.route('/video_feed')
 def video_feed():
         return Response(gen(VideoCamera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
-	
-
 	
 if __name__ == '__main__':
 	
@@ -48,5 +41,3 @@ if __name__ == '__main__':
 	#use something obscure.. Have a strong password on the pi
 	#In your router settings enter local IP of pi with port 79 forwarded.
 	#Then visit www.yourdomain.com:79 or your_ip:79
-	
-	
